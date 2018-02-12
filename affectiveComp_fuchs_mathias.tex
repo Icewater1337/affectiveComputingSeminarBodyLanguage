@@ -789,12 +789,12 @@ There are various uses for emotion detection by body language. Some of those are
 \end{figure}
 
 
-In the field of affective computing however, it is not only a challenge to interpret the body language, but also to detect the position of the human posture and get useful data out of it. This leads to the two main challenges: \emph{1. Detection of the posture} and \emph{2. How to interpret the posture representation} ( see \autoref{fig:phasesOfEmotionDetectingSystem}\cite{singhsignificance}). 
+In the field of affective computing however, it is not only a challenge to interpret the body language, but also to detect the position of the human posture and get useful data out of it. This leads to the two main challenges: \emph{1. Detection of the posture} and \emph{2. How to interpret the posture representation} ( see \autoref{fig:phasesOfEmotionDetectingSystem}\cite{singhsignificance}). However those two steps are done in one with certain machine learning approaches that consist of neural networks\cite{schindler2008recognizing, kleinsmith2007recognizing, kleinsmith2005incremental}.
 
-In the following work I present papers that provide approaches for both, the detection of the human posture as well as for interpreting the found results. In the following sections first some general things about body language are explained, then I present various papers with different approaches. Finally I propose a theoretical model of how to recognize human emotion by gait. 
+In the following work I will first give an overview over the psychology behind emotion detection through body language. After that I present papers that provide approaches for both, the detection of the human posture as well as for interpreting the found results. Finally I propose a theoretical model of how to recognize human emotion by gait in real-time. 
 
 \section{Emotions through body language}
-As already stated, 55\% of our communication consists of non-verbal cues, like body language. The expression of emotions has been studied extensively\cite{tomkins1962,ekmann1973universal,ekman1993facial,frijda1986emotions}. According to Eckman\cite{eckman2003emotions} there are 6 basic emotions:
+As already stated, 55\% of our communication consists of non-verbal cues, like body language. The expression of emotions has been studied extensively\cite{tomkins1962,ekmann1973universal,ekman1993facial,frijda1986emotions}. According to Eckman\cite{eckman2003emotions} there are 6 basic categories of emotions:
 \begin{itemize}
 \item{Anger}
 \item{Disgust}
@@ -811,12 +811,15 @@ As already stated, 55\% of our communication consists of non-verbal cues, like b
   \label{fig:basicEmotions}
 \end{figure}
 
+Those emotions seem to be universal and the same across different cultures\cite{ekmann1973universal}. The motivation for those 6 categories goes back to the theory, that the same facial muscles are used for the same emotions across different cultures\cite{schindler2008recognizing}. This categorical notion of emotions allows systems to more easily categorize new samples to one of those existing categories, instead of having to create new categories from scratch\cite{schindler2008recognizing}.
+We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}), because those signs are mostly shown involuntary micro expressions. Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. 
+In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs based on the body position and body movement. 
+The distance between two people can also show the attitude between them. If the distance is less than the local social norms permit, we can infer a negative attitude\cite{mehrabian1969significance}. However this has to be treated carefully, because the context is important. For example, if two people that are in a romantic relationship with each other, then less distance is not a negative sign. It has also been found, that the meaning of distance depends on the expectancies of the subjects. If the subjects expect a positive interaction, then a close distance is a positive thing, and if they expect a negative interaction, then a close distance is negative\cite{mehrabian1969significance}.
 
-We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}), because those signs are involuntary micro expressions. Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. 
-In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs based on the body position and body movement.
+In addition larger body movements like the gait of a person, can also tell us something about the emotional state of a person. For example are angry movements larger, faster and seem jerky, compared to normal movements\cite{singhsignificance}. Whereas fearful and sad movements tend to be less energetic, smaller and slower.\cite{singhsignificance}
 
 
-The form of the hand can also give information about the emotional state of a person. For example open palms could mean pleasure/ openness, closed hands towards the chest could mean a sense of pride and clenched fists could mean anger\cite{beale2008affect,singh2015edbl}.
+The form of the hand can also give information about the emotional state of a person. For example open palms could mean pleasure/ openness, closed hands towards the chest could mean a sense of pride and clenched fists could mean anger\cite{beale2008affect,singh2015edbl}. Kipp and Martin (2009) et al.\cite{kipp2009gesture} even stated, that for right-handed people, the right hand was more used when experiencing anger and the left hand more, when their feelings were relaxed and positive.
 
 In the following sections I summarize a few approaches that extract and/or interpret body language in different ways. 
 
@@ -923,9 +926,33 @@ This approach classified acessibility with an accuracy of 88\%\cite{mccoll2012af
 \label{fig:accessibilityLevels}
 \end{figure}
 
+
+\subsection{Recognizing Emotions Expressed by Body Pose: a Biologically Inspired Neural Model}
+This approach by Schindler et al.\cite{schindler2008recognizing} aims to categorize images into the 6 basic emotions\cite{eckman2003emotions} \emph{angry, disgusted, fearful, happy, sad, surprised and neutral}. The Idea is to model the visual pathway of recognition of a human. This means the process in which the visual cortex extracts cues from the visual input to determine an emotion\cite{schindler2008recognizing}. The model is inspired by \cite{riesenhuber1999hierarchical,serre2007robust}. 
+The model consists of a hierarchy of neural feature detectors\cite{schindler2008recognizing}. The visual cortex contains various areas: \emph{Primary visual cortex (V1), secondary visual cortex or prestriate cortex (V2), visual area (V3), visual area (V4) and middle temporal visual area (V5)}\footnote{\url{https://en.wikipedia.org/wiki/Visual_cortex}}. The model is built according to those areas (see \autoref{fig:biologicallyInspiredNeuralModel}). 
+
+The recall of the system achieved 82\% whereas the recall for human testers was 87\%. This means that on average the model only miss-classified 5\% more than the human testers. Interesting to see is the direct comparison against the human for the single emotions that were classified (see \autoref{fig:biologicallyInspiredNeuralModelEval}).
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{biologicallyInspiredNeuralModelEval.jpg}
+\caption{The classification performance of the model in comparison to the human testers\cite{schindler2008recognizing}}
+\label{fig:biologicallyInspiredNeuralModelEval}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{biologicallyInspiredNeuralModel.jpg}
+\caption{"Illustration of the neural model. From the raw image on the retina, local orientation is extracted (area V1), pooled over spatial neighborhoods (V2/V4), and filtered with learned complex features (V4/I).T The filter response serves as input
+into a discriminative classifier (IT). Parameters were chosen for illustration purposes and are different from the actual implementation."\cite{schindler2008recognizing}}
+\label{fig:biologicallyInspiredNeuralModel}
+\end{figure}
+
+
 \subsection{Real Time Multi-Person 2D Pose Estimation using Part Affinity Fields}
-This approach inputs a given image into a two-branched convolutional neural network
-Compared to the approach in \autoref{subsec:lieDetectionLAM} no initialisation pose is needed. Hence the features can be extracted instantly and live. Like this we could also analyse the shoulder position like it was done in \cite{barathi2016lie}.
+The approach of Cao et al.\cite{cao2017realtime} inputs a given image into a two-branch convolutional neural network. First a feed forward network simultaneously predicts a set of confidence maps of the body part locations (see \autoref{fig:openPoseProcess} (b)) and a set of vector fields of part affinities, which encode the degree of association between the different parts (see \autoref{fig:openPoseProcess} (c))\cite{cao2017realtime}. After that the confidence maps and the affinity fields are parsed by greedy inference (see \autoref{fig:openPoseProcess}) and they output the 2D key points for all the people in the image\cite{cao2017realtime}.
+Like this we could also analyse the shoulder position like it was done in \cite{barathi2016lie} and other movement based emotion detection. However it would not be possible to angle-based evaluations like in McCol et al's approach\cite{mccoll2012affect}. 
 
 \begin{figure}
 \centering
@@ -957,6 +984,7 @@ The reported accuracy of this approach is 92.9\% accuracy on simple backgrounds 
 \section{Emotion detection through gait}
 
 \section{Conclusion}
+\note{IncrementalAndInteraction paper, tell that i've learned that some emotions are grouped close together and share some similar features, e.g. happy and surprise. }
 
 \section{Future work}
 
