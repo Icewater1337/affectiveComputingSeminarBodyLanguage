@@ -746,9 +746,9 @@ Email: fuchsmat@students.unibe.ch}}
 
 
 \begin{abstract}
-%\boldmath
-Humans communicate only x%[cite] through words. Most of the communiaction is through back-channels like body language.[cite]
-Humans strive to build machines that can interact with humans in a humanoid way. This is why it is crucial for a computer to be able to understand in which emotional state the user is in. To achieve such a feat there are different approaches. In this paper I give an overview over the body language approaches done today and propose a  model which analyses emotions based on the way a human subject walks. ~\cite{singhsignificance}
+Humans strive to build machines that can interact with humans in a humanoid way. This is why it is crucial for a computer to be able to understand in which emotional state the user is in. To achieve such a feat there are different approaches.
+Within the research area of affective computing, a large part of the studies focusses on facial expressions and changes in speech. These expressions are good to recognize the emotional state of a human during social interaction, however they may not be suitable  in other situations for example recognizing emotions from a greater distance\cite{karg2012pattern}.
+In this paper I give an overview over the body language recognition approaches done today and propose a model which analyses emotions based on the way a human subject walks.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -776,34 +776,67 @@ Humans strive to build machines that can interact with humans in a humanoid way.
 
 
 \section{Introduction}
-% no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.7 and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
+For a long time people were convinced that human behaviour is "all nurture and no nature"\cite{eckman2003emotions}. However already Darwin\cite{darwin} suggested that along with the facial expression, the human body movements and the gestures also represent the state of mind and the corresponding emotions of humans. We know today that body language pays a very important contribution to understand the affective state of a person\cite{ekman1967head,mccoll2012affect}. Surprisingly only 7\% of human communication are made of words and 55\% are made up of non-verbal communication\cite{eckman2003emotions,singhsignificance,mehrabian1969significance}. 
+The idea of this paper was to focus on micro expressions in body language. However there are no bodily micro expressions as in facial micro expressions. A micro expression is a "very fast facial movement lasting less than one-fifth of a second"\cite{eckman2003emotions}. Body language in comparison can be subconscious however it can be consciously changed more easily, than a facial micro expression. This is the reason that I focus on the emotion detection via body language in this paper.
 
-\hfill mds
- 
-\hfill January 11, 2007
+There are various uses for emotion detection by body language. Some of those are detecting the \emph{affective state} of a person, \emph{lie detection}, the degree of \emph{accessibility} towards another person etc. Different indicators for interpreting body language can be \emph{body position and distance}\cite{mccoll2012affect,mehrabian1969significance}, \emph{body movement}\cite{singhsignificance,karg2012pattern} and \emph{hand movement}\cite{wang2007hand,triesch2001system}. This list is not necessarily concluding, but those are the parts that I focussed on in this work.
 
-\section{Interpreting body language}
-Human body langauge plays an important part in conversation. Surprisingly only x\% of human communication are made of words and 55\% are made up of non-verbal communication\citep{eckman2003emotions,singhsignificance }.
-Body language very important contribution to understand affective state [1,2]
-Different ways of emotion detection
-Affective state
-Lie detection
-Accessibility
-Different indicators 
-Body position and distance 
-Body movement
-Hands/ Arms
+\begin{figure}[H]
+\centering
+   \includegraphics[width=\linewidth]{phasesOfEmotionDetectingSystem.jpg}
+  \caption{The phases of a bodily emotion detection system\cite{singhsignificance}}
+  \label{fig:phasesOfEmotionDetectingSystem}
+\end{figure}
 
+
+In the field of affective computing however, it is not only a challenge to interpret the body language, but also to detect the position of the human posture and get useful data out of it. This leads to the two main challenges: \emph{1. Detection of the posture} and \emph{2. How to interpret the posture representation} ( see \autoref{fig:phasesOfEmotionDetectingSystem}\cite{singhsignificance}). 
+
+In the following work I present papers that provide approaches for both, the detection of the human posture as well as for interpreting the found results. In the following sections first some general things about body language are explained, then I present various papers with different approaches. Finally I propose a theoretical model of how to recognize human emotion by gait. 
+
+\section{Emotions through body language}
+As already stated, 55\% of our communication consists of non-verbal cues, like body language. The expression of emotions has been studied extensively\cite{tomkins1962,ekmann1973universal,ekman1993facial,frijda1986emotions}. According to Eckman\cite{eckman2003emotions} there are 6 basic emotions:
+\begin{itemize}
+\item{Anger}
+\item{Disgust}
+\item{Fear}
+\item{Happiness}
+\item{Sadness}
+\item{Surprise}
+\end{itemize}
+
+\begin{figure}
+\centering
+   \includegraphics[width=\linewidth]{basicEmotions.jpg}
+   \caption{Facial expression of the six basic emotions ( and contempt)}
+  \label{fig:basicEmotions}
+\end{figure}
+
+
+We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}), because those signs are involuntary micro expressions. Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs.
+
+
+\begin{figure}
+\centering
+   \includegraphics[width=\linewidth]{basicEmotionsBodylanguage.jpg}
+  \caption{Bodily signs of the six basic emotions\cite{schindler2008recognizing}}
+  \label{fig:basicEmotionsBodyLanguage}
+\end{figure}
+
+\begin{figure}
+\centering
+   \includegraphics[width=\linewidth]{bodyPostureTable.jpg}
+  \caption{A table of bodily signs for different emotions\cite{singhsignificance}}
+  \label{fig:bodyPostureTable}
+\end{figure}
 
 \section{Extract body language}
 
-\section{Emotion detection through walk}
+
+\section{Interpreting body language}
+
+
+
+\section{Emotion detection through gait}
 
 \section{Conclusion}
 
