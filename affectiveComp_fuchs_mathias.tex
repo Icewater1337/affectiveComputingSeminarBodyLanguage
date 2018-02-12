@@ -815,6 +815,8 @@ As already stated, 55\% of our communication consists of non-verbal cues, like b
 We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}), because those signs are involuntary micro expressions. Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs.
 
 
+In the following sections I summarize a few approaches that extract and/or interpret body language in different ways. 
+
 \begin{figure}
 \centering
    \includegraphics[width=\linewidth]{basicEmotionsBodylanguage.jpg}
@@ -829,7 +831,7 @@ We can find clear signs of all those emotions in our faces (see \autoref{fig:bas
   \label{fig:bodyPostureTable}
 \end{figure}
 
-\section{Different approaches}
+\section{Emotion detection through body position}
 \subsection{Lie Detection based on Facial Micro Expression, body Language and Speech Analysis}
 A very interesting approach was done by Barathi\cite{barathi2016lie}. 
 \subsubsection{Body pose extraction}
@@ -876,7 +878,8 @@ Based on the postelet representation a line graph (see \autoref{fig:edblStickPos
 \end{figure}
 
 \subsubsection{Interpretation}
-To figure out the emotional state of a person, the position of the shoulders is interpreted. There is differentiated between three different types of poses: 1. normal/ calm, 2. confused, amazed or in doubt and 3. depressed/ not interested. \autoref{fig:shoulderPositionAndMeaning} shows the three different types. First the slope of the normal shoulder position \theta is calculated. Then it is compared to other images of the same person and if the slope is bigger than the slope of 	\theta then it is a sign of doubt, confusion or being amazed. If the slope is smaller than the slope of \theta then it is a sign of a depressed, not-interested or lazy emotional state.
+To figure out the emotional state of a person, the position of the shoulders is interpreted. There is differentiated between three different types of poses: 1. normal/ calm, 2. confused, amazed or in doubt and 3. depressed/ not interested. \autoref{fig:shoulderPositionAndMeaning} shows the three different types. First the slope of the normal shoulder position $\theta$ is calculated. An initialisation pose is needed. Then it is compared to other images of the same person and if the slope is bigger than the slope of 	$\theta$ then it is a sign of doubt, confusion or being amazed. If the slope is smaller than the slope of $\theta$ then it is a sign of a depressed, not-interested or lazy emotional state.
+ 
 
 \begin{figure}
 \centering
@@ -884,6 +887,56 @@ To figure out the emotional state of a person, the position of the shoulders is 
 \caption{Meaning of shoulder positions. (a) shows a person in normal or calm position, (b) shows a person in confused or amazed state and (c) shows a person in a depressed or not interested pose.\cite{singh2015edbl}}
 \label{fig:shoulderPositionAndMeaning}
 \end{figure}
+
+\section{Affect Detection from Body Language during Social HRI}
+\subsubsection{Body pose extraction}
+This approach of McColl et al\cite{mccoll2012affect} also uses Microsoft Kinect as a base to extract the body pose. It creates an ellipsoid model as seen in \autoref{fig:ellipsoidModel}. To do this, the Kinect sensor first performs a human body extraction. Then the extracted body poses are observed to see if a static pose is displayed. Once a static pose is identified the segmented body parts are fitted with ellipsoids\cite{mccoll2012affect}. The static body poses are further explained in \autoref{subsubsec:ellipsoidModelInterpretation}.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{ellipsoidModel.jpg}
+\caption{An ellipsoid model od the human body built on the basis of Microsoft Kinect.\cite{singh2015edbl}}
+\label{fig:ellipsoidModel}
+\end{figure}
+
+\subsubsection{Interpretation}
+\label{subsubsec:ellipsoidModelInterpretation}
+To figure out the emotional state of the subject, static body poses are used. The poses are based on the Nonverbal Interaction States Analysis of the Davis Nonverbal States Scale\cite{davis1994nonverbal}. Body angle, trunk lean and arm position are evaluated. The resulting metrics are the following: 
+\begin{itemize}
+\item{\textbf{Three different body angles:} \emph{Toward(T)}: 0°-3° angle from the robot, \emph{Neutral(N)}: 3°-15° angle from the robot, \emph{Away(A)}: >15° from the robot}
+\item{\textbf{Trunk lean:}\emph{Upright}: The shoulders are over the hips, \emph{Forward/ backward lean}: The shoulders are closer/ farther away than the hips in relation to the robot, \emph{Right/ left lean}: The right/ left shoulder is tilted past the right/ left hip.}
+\item{\textbf{Arm positions:} \emph{T}: The arms are closer to the robot than the upper trunk, \emph{A}: The arms are farther from the robot than the trunk, \emph{N}: else}
+\end{itemize}
+
+According to those metrics 4 accessibility levels\cite{mccoll2012affect} have been defined (see \autoref{fig:accessibilityLevels}). Level I-IV, where I is least accessible and IV is the most accessible state. The arm orientation is used for a finer scaling of the accessibility levels.
+
+This approach classified acessibility with an accuracy of 88\%\cite{mccoll2012affect}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{accessibilityLevels.jpg}
+\caption{Different accessibility levels defined to determine the level of accessibility of the person against the system\cite{mccoll2012affect}}
+\label{fig:accessibilityLevels}
+\end{figure}
+
+\section{Emotion detection through hand position}
+\subsection{A system for person-independent hand posture recognition against complex backgrounds}
+\subsubsection{Hand pose extraction}
+Most approaches in this field, require the hand to be in front of a static background or the hand to be the only skin coloured item in the picture, in order for it to be recognized\cite{cui1995learning,hunter1995posture,kohler1997technical,min1999visual}. The approach of Triesch and Malsburg\cite{triesch2001system}, proposes a solution using elastic graph matching (EGM) with multiple feature types. EGM is "a neurally inspired object recognition architecture"\cite{lades1993distortion}. In EGM the views of objects are visualized as a labeled 2-d graph.\cite{triesch2001system}. The nodes of the graph contain a local image description and the edges are labelled with a distance vector which represents the distance between the nodes. 
+
+
+\subsubsection{Interpretation}
+Various graphs are created from training images and then images of new hands are matched to the most similar existing image. In \autoref{egmHand} we can see an example of a graph, which is matched to a new hand.
+
+The reported accuracy of this approach is 92.9\% accuracy on simple backgrounds and 85.8\% accuracy on complex background.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{egmHand.jpg}
+\caption{Picture of an elastic graph of a hand, and a new hand that matches it\cite{triesch2001system}}
+\label{fig:egmHand}
+\end{figure}
+\section{Emotion detection through gait}
 
 \section{Emotion detection through gait}
 
