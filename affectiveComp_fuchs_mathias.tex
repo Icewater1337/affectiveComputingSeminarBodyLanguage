@@ -829,12 +829,61 @@ We can find clear signs of all those emotions in our faces (see \autoref{fig:bas
   \label{fig:bodyPostureTable}
 \end{figure}
 
-\section{Extract body language}
+\section{Different approaches}
+\subsection{Lie Detection based on Facial Micro Expression, body Language and Speech Analysis}
+A very interesting approach was done by Barathi\cite{barathi2016lie}. 
+\subsubsection{Body pose extraction}
+To extract the body poses from videos the Limb Action Model Converter\cite{du20143d} has been used. This converter uses Microsoft Kinect as a base. 
+The Limb Action Model extracts 10 limbs from a body posture: "Spine to center shoulder, center shoulder to head, left/right shoulder to left/right elbow, left/right elbow to left/right wrist, left/right hip to left/right knee and left/right knee to left/right ankle"\cite{du20143d}. In \autoref{fig:limbAngleModel} we can see how the posture is represented after the extraction.
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{limbAngleModel.jpg}
+\caption{Skeleton joints extracted with the Limb Angle Model\cite{du20143d}}
+\label{fig:limbAngleModel}
+\end{figure}
 
-\section{Interpreting body language}
+\subsubsection{Interpretation}
+As the paper focusses on lie detection, they defined the following signs for lying\cite{kinsey2012,sorjoo,barathi2016lie}:
+\begin{itemize}
+\item{Increasing hand to face/mouth gestures}
+\item{Nose touching: Because of an adrenaline rush, the capillaries open up, which causes the nose to itch}
+\item{Place the hand close to or over the mouth}
+\item{Small gestures like lip biting, hands rubbing, fidgeting}
+\item{Clenched fist, crossed arms}
+\end{itemize}
+According to those specifications they trained their system with images of liars that were exhibiting those typical body language cues for lying and pictures of people who were not lying. All the images are subjected to the Limb Action Model Converter. Finally they clustered the converted pictures with k-means.
+Sadly they did not provide an evaluation for the body language part of their method.
 
+\subsection{EDBL - Algorithm for Detection and Analysis of Emotion Using Body Language }
+\subsubsection{Body pose extraction}
+EDBL relies on a pose estimation which is using postelets for humnan parsing\cite{wang2011learning}. Different postelets are extracted from images. A linear SVM classifier is trained for detecting the presence of each postelet. In the end we get a complete model of the human. See \autoref{fig:posteletsFeatureExtraction} for a graphical representation of the process.
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{posteletsFeatureExtraction.jpg}
+\caption{Graphical illustration of the postelet model\cite{wang2011learning}}
+\label{fig:posteletsFeatureExtraction}
+\end{figure}
+
+Based on the postelet representation a line graph (see \autoref{fig:edblStickPose} of the extracted pose is created and used for the interpretation of the body posture. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{edblStickPose.jpg}
+\caption{EDBL stick pose representantion\cite{singh2015edbl}}
+\label{fig:edblStickPose}
+\end{figure}
+
+\subsubsection{Interpretation}
+To figure out the emotional state of a person, the position of the shoulders is interpreted. There is differentiated between three different types of poses: 1. normal/ calm, 2. confused, amazed or in doubt and 3. depressed/ not interested. \autoref{fig:shoulderPositionAndMeaning} shows the three different types. First the slope of the normal shoulder position \theta is calculated. Then it is compared to other images of the same person and if the slope is bigger than the slope of 	\theta then it is a sign of doubt, confusion or being amazed. If the slope is smaller than the slope of \theta then it is a sign of a depressed, not-interested or lazy emotional state.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{shoulderPositionAndMeaning.jpg}
+\caption{Meaning of shoulder positions. (a) shows a person in normal or calm position, (b) shows a person in confused or amazed state and (c) shows a person in a depressed or not interested pose.\cite{singh2015edbl}}
+\label{fig:shoulderPositionAndMeaning}
+\end{figure}
 
 \section{Emotion detection through gait}
 
