@@ -779,7 +779,7 @@ In this paper I give an overview over the body language recognition approaches d
 For a long time people were convinced that human behaviour is "all nurture and no nature"\cite{eckman2003emotions}. However already Darwin\cite{darwin} suggested that along with the facial expression, the human body movements and the gestures also represent the state of mind and the corresponding emotions of humans. We know today that body language pays a very important contribution to understand the affective state of a person\cite{ekman1967head,mccoll2012affect}. Surprisingly only 7\% of human communication are made of words and 55\% are made up of non-verbal communication\cite{eckman2003emotions,singhsignificance,mehrabian1969significance}. 
 The idea of this paper was to focus on micro expressions in body language. However there are no bodily micro expressions as in facial micro expressions. A micro expression is a "very fast facial movement lasting less than one-fifth of a second"\cite{eckman2003emotions}. Body language in comparison can be subconscious however it can be consciously changed more easily, than a facial micro expression. This is the reason that I focus on the emotion detection via body language in this paper.
 
-There are various uses for emotion detection by body language. Some of those are detecting the \emph{affective state} of a person, \emph{lie detection}, the degree of \emph{accessibility} towards another person etc. Different indicators for interpreting body language can be \emph{body position and distance}\cite{mccoll2012affect,mehrabian1969significance}, \emph{body movement}\cite{singhsignificance,karg2012pattern} and \emph{hand movement}\cite{wang2007hand,triesch2001system}. This list is not necessarily concluding, but those are the parts that I focussed on in this work.
+There are various uses for emotion detection by body language. Some of those are detecting the \emph{affective state} of a person, \emph{lie detection}, the degree of \emph{accessibility} towards another person etc. Different indicators for interpreting body language can be \emph{body position and distance}\cite{mccoll2012affect,mehrabian1969significance}, \emph{body movement}\cite{singhsignificance,karg2012pattern} and \emph{hand form}\cite{wang2007hand,triesch2001system}. This list is not necessarily concluding, but those are the parts that I focussed on in this work.
 
 \begin{figure}[H]
 \centering
@@ -812,8 +812,11 @@ As already stated, 55\% of our communication consists of non-verbal cues, like b
 \end{figure}
 
 
-We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}), because those signs are involuntary micro expressions. Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs.
+We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}), because those signs are involuntary micro expressions. Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. 
+In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs based on the body position and body movement.
 
+
+The form of the hand can also give information about the emotional state of a person. For example open palms could mean pleasure/ openness, closed hands towards the chest could mean a sense of pride and clenched fists could mean anger\cite{beale2008affect,singh2015edbl}.
 
 In the following sections I summarize a few approaches that extract and/or interpret body language in different ways. 
 
@@ -833,6 +836,7 @@ In the following sections I summarize a few approaches that extract and/or inter
 
 \section{Emotion detection through body position}
 \subsection{Lie Detection based on Facial Micro Expression, body Language and Speech Analysis}
+\label{subsec:lieDetectionLAM}
 A very interesting approach was done by Barathi\cite{barathi2016lie}. 
 \subsubsection{Body pose extraction}
 To extract the body poses from videos the Limb Action Model Converter\cite{du20143d} has been used. This converter uses Microsoft Kinect as a base. 
@@ -919,6 +923,17 @@ This approach classified acessibility with an accuracy of 88\%\cite{mccoll2012af
 \label{fig:accessibilityLevels}
 \end{figure}
 
+\subsection{Real Time Multi-Person 2D Pose Estimation using Part Affinity Fields}
+This approach inputs a given image into a two-branched convolutional neural network
+Compared to the approach in \autoref{subsec:lieDetectionLAM} no initialisation pose is needed. Hence the features can be extracted instantly and live. Like this we could also analyse the shoulder position like it was done in \cite{barathi2016lie}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{openPoseProcess.jpg}
+\caption{OpenPose process visualized\cite{cao2017realtime}}
+\label{fig:openPoseProcess}
+\end{figure}
+
 \section{Emotion detection through hand position}
 \subsection{A system for person-independent hand posture recognition against complex backgrounds}
 \subsubsection{Hand pose extraction}
@@ -927,6 +942,7 @@ Most approaches in this field, require the hand to be in front of a static backg
 
 \subsubsection{Interpretation}
 Various graphs are created from training images and then images of new hands are matched to the most similar existing image. In \autoref{egmHand} we can see an example of a graph, which is matched to a new hand.
+Like this we can easily recognize if a hand is clenched to a fist ( e.g. anger).
 
 The reported accuracy of this approach is 92.9\% accuracy on simple backgrounds and 85.8\% accuracy on complex background.
 
