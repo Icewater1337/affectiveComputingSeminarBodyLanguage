@@ -794,6 +794,7 @@ In the field of affective computing however, it is not only a challenge to inter
 In the following work I will first give an overview over the psychology behind emotion detection through body language. After that I present papers that provide approaches for both, the detection of the human posture as well as for interpreting the found results. Finally I propose a theoretical model of how to recognize human emotion by gait in real-time. 
 
 \section{Emotions through body language}
+\label{sec:emotions}
 As already stated, 55\% of our communication consists of non-verbal cues, like body language. The expression of emotions has been studied extensively\cite{tomkins1962,ekmann1973universal,ekman1993facial,frijda1986emotions}. According to Eckman\cite{eckman2003emotions} there are 6 basic categories of emotions:
 \begin{itemize}
 \item{Anger}
@@ -929,8 +930,9 @@ This approach classified acessibility with an accuracy of 88\%\cite{mccoll2012af
 
 
 \subsection{Recognizing Emotions Expressed by Body Pose: a Biologically Inspired Neural Model}
-This approach by Schindler et al.\cite{schindler2008recognizing} aims to categorize images into the 6 basic emotions\cite{eckman2003emotions} \emph{angry, disgusted, fearful, happy, sad, surprised and neutral}. The Idea is to model the visual pathway of recognition of a human. This means the process in which the visual cortex extracts cues from the visual input to determine an emotion\cite{schindler2008recognizing}. The model is inspired by \cite{riesenhuber1999hierarchical,serre2007robust}. 
-The model consists of a hierarchy of neural feature detectors\cite{schindler2008recognizing}. The visual cortex contains various areas: \emph{Primary visual cortex (V1), secondary visual cortex or prestriate cortex (V2), visual area (V3), visual area (V4) and middle temporal visual area (V5)}\footnote{\url{https://en.wikipedia.org/wiki/Visual_cortex}}. The model is built according to those areas (see \autoref{fig:biologicallyInspiredNeuralModel}). 
+This approach by Schindler et al.\cite{schindler2008recognizing} aims to categorize images into the 6 basic emotions\cite{eckman2003emotions} \emph{angry, disgusted, fearful, happy, sad, surprised and neutral}. The Idea is to model the visual pathway of recognition of a human. This means the process in which the visual cortex extracts cues from the visual input to determine an emotion\cite{schindler2008recognizing}. The model is inspired by \cite{riesenhuber1999hierarchical,serre2007robust}. This approach is interesting, because it combines various commonly used and efficient techniques like MAX pooling, PCA and SVM in a hierarchical way that follows the organization of the human visual cortex.
+
+The visual cortex contains various areas: \emph{Primary visual cortex (V1), secondary visual cortex or prestriate cortex (V2), visual area (V3), visual area (V4) and middle temporal visual area (V5)}\footnote{\url{https://en.wikipedia.org/wiki/Visual_cortex}}. The model is built according to those areas (see \autoref{fig:biologicallyInspiredNeuralModel}). 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{biologicallyInspiredNeuralModel.jpg}
@@ -940,6 +942,8 @@ into a discriminative classifier (IT). Parameters were chosen for illustration p
 \end{figure}
 
 The recall of the system achieved 82\% whereas the recall for human testers was 87\%. This means that on average the model only miss-classified 5\% more than the human testers. Interesting to see is the direct comparison against the human for the single emotions that were classified (see \autoref{fig:biologicallyInspiredNeuralModelEval}).
+
+This approach is quite interesting, because it performs fairly well, even though the training set only consists of 50 actors that created a total of 696 images.
 
 \begin{figure}[H]
 \centering
@@ -995,6 +999,7 @@ The classification approach was done in different ways. The most successful one 
 This approach shows, that we can detect the emotional state of a person from it's gait, however because all people walk very individually, it is necessary to get a baseline walk from each person. Hence it is very hard/ impossible to instantly infer information from a person's walk, when seeing the person for the first time.
 
 \subsection{Emotion recognition using Kinect motion capture data of human gaits}
+\label{subsec:LiGait}
 \subsubsection{Gait information extraction}
 The approach of Li et al.\cite{li2016emotion} uses a set up with two kinect cameras that were placed oppositely at the two ends of a 6m x 1m footpath. The emotional states of the participants were recorded in the same way as in the experiment described under \autoref{subsec:EDNW}. The data reported by the two kinect cameras was processed independently\cite{li2016emotion}. Kinect outputs a stick figure with the different body joints marked (see \autoref{fig:kinectStick}) of the recorded person. The recorded data contains the 3-dimension position of the 14 joints\cite{li2016emotion}. This results in a 42 dimension vector. Because each record consisted of T frames, the data of one record is represented by a T * 42 matrix\cite{li2016emotion}. Fourier transformation was used for further feature extraction\cite{li2016emotion}. 
 
@@ -1013,11 +1018,11 @@ For recognizing happy or neutral, the achieved accuracy was 79.6\% with Kinect1 
 This approach shows that it is also possible to recognize emotions from human gait, without using any sensors. However it makes a great difference whether the person is recorded from the front or the back.
 
 
-\section{ProposedModel}
+\section{Proposed model for emotion detection through human gait}
 In this section I review the possibilities for recognizing emotions through human gait in a real-time scenario.
 
 \subsection{Possibilities and limitations}
-The problem with many emotion recognition algorithms is, that they often need a neutral initialization pose\cite{li2016emotion,cui2016emotion} because humans and especially human gaits are very individual. This makes a real-time system very hard, without having data of a specific person beforehand. However there are various gait databases available\cite{wang2008recognizing,karg2009comparison}, which could be used for training with machine learning algorithms. This still has to be treated with great care due to the high individuality of gaits\cite{karg2012pattern,janssen2008recognition}. In \cite{janssen2008recognition} the inter-individual recognition of emotions through gait was only around chance level.
+The problem with many emotion recognition algorithms is, that they often need a neutral initialization pose\cite{li2016emotion,cui2016emotion} because humans and especially human gaits are very individual. This makes a real-time system very hard, without having data of a specific person beforehand. However there are various gait databases available\cite{wang2008recognizing,karg2009comparison}, which could be used for training with machine learning algorithms. This still has to be treated with great care because 1. The data bases only consist of acted emotions (currently no spontaneous gait database exists that is publicly acessible) and 2. Due to the high individuality of gaits\cite{karg2012pattern,janssen2008recognition}. In \cite{janssen2008recognition} the inter-individual recognition of emotions through gait was only around chance level.
 
 \begin{figure}
 \centering
@@ -1032,34 +1037,37 @@ The problem with many emotion recognition algorithms is, that they often need a 
 \caption{Average accuracy of inter individual classification approaches with various pre-processing and classification methods\cite{karg2012pattern}}
 \label{fig:personDependantClassification}
 \end{figure}
-However this leads to the next problem, the expression of the affective state in gait is often also associated with the velocity\cite{crane2007motion,pollick2001perceiving,roether2009critical}, in addition to the movement itself. This leads to the problem that gait data is often characterized by a high dimensionality, temporal dependency, high variability and nonlinearities\cite{karg2012pattern}, which makes the real-time classification difficult. This is why it is important to preprocess the gathered data and limit the feature space. PCA, KPCA, LDA and GDA are commonly applied\cite{karg2012pattern} to achieve this.\
+However this leads to the next problem, the expression of the affective state in gait is often also associated with the velocity\cite{crane2007motion,pollick2001perceiving,roether2009critical}, in addition to the movement itself. This leads to the problem that gait data is often characterized by a high dimensionality, temporal dependency, high variability and nonlinearities\cite{karg2012pattern}, which makes the real-time classification difficult. This is why it is important to preprocess the gathered data and limit the feature space and do a good feature extraction. PCA, KPCA, LDA and GDA are commonly applied for feature selection\cite{karg2012pattern}.\
 
-\autoref{fig:personDependantClassification} and \autoref{fig:interIndividualClassification} highlight the importance of appropriate preprocessing, picking a proper classifier as well as the importance of person dependant (\autoref{fig:personDependantClassification}) and person independent classification (\autoref{fig:interIndividualClassification}).
+\autoref{fig:personDependantClassification} and \autoref{fig:interIndividualClassification} highlight the importance of appropriate preprocessing, feature selection and picking a proper classifier as well as the importance of person dependant (\autoref{fig:personDependantClassification}) and person independent classification (\autoref{fig:interIndividualClassification}).\
 
+The emotion detection can be reduced to a classification problem ( classify into one of the 6 emotion types\cite{eckman2003emotions} described in \autoref{sec:emotions}. The most successful approaches for emotion detection in body movement in general (not gait specific) seem to be support vector machines\cite{karg2012pattern,schindler2008recognizing} and artificial neural networks\cite{karg2012pattern, kapur2005gesture}. However there is not much work found for emotion detection through human gait using artificial neural networks\cite{janssen2008recognition}.
 
-The emotion detection can be reduced to a classification problem ( classify into one of the 6 emotion types)\cite{schindler2008recognizing}\note{add more cite}. The most successful approaches for emotion detection in gait movement are support vector machines\cite{cui2016emotion,karg2012pattern} and artificial neural networks\cite{schindler2008recognizing,karg2012pattern}.
+\subsection{Concept}
+Based on those limitations the following approach could be useful:
+\begin{itemize}
+\item{Create/ find a large enough gait database to train the model initially}
+\item{Extract the pose using openPose\cite{cao2017realtime}, as it is working in real-time and without any special equipment. Any camera can do it.}
+\item{Do the feature extraction according to \autoref{fig:interIndividualClassification}. A good choice would be to use Sig. Subsection + LDA\cite{karg2012pattern}}.
+\item{Use a k-nn classifier\cite{karg2012pattern}}
+\item{Do a continuous recording of the individual's gait, together with an evaluation about how they feel in this moment. This could be easily doable in a workplace environment. If the system can compare person-dependent it will greatly improve it's accuracy}
+\end{itemize}
 
-- somehow use weights using the known things about gait described in emotion section
-- train using existing databases, or if for example system is installed in a workplace: record data of a specific person and learn over time. \cite{janssen2008recognition} shows that person recognition through gait is possible
-- Very promising realtime posture recognition model is openPose. Maybe take this representation. However features extracted from this representation concerning gait, would still be multi dimensional. I have not found work that does it in real time.
-- OpenPose could be valid, because emotion detection can be reduced to e classification problem, which can be done faster.
-- In Gait, the movement plays a role but also other parts like speed etc.
+A question which I can not answer is, if the classification can work in real-time, or if it takes too long. All the research found did not do it in real-time. Only the openPose pose extraction algorithm worked in real time \cite{cao2017realtime}.\
 
-0. Get pre existing database if possible
-1. Extract realtime simple model (open pose).
-2. Preprocess data and do feature extraction.
-3. Record individuals by their gait, and compare with individual gaits for the classification. 
-4. Recognize emotions using a classification algorithm. 6 basic emotions. Maybe an approach like in \cite{schindler2008recognizing}. 
+An artificial neural networks approach or a combination could also work, but the research is very thin on this topic\cite{janssen2008recognition,karg2012pattern}.
 
 
 
 \section{Conclusion}
-One thing that we always have to keep in mind is that emotion recognition is not an easy task, also for the human himself\cite{ekman1974detecting,karg2012pattern,schindler2008recognizing}. The research clearly shows that it is possible to extract human emotions from body language. There are many different approaches e.g. emotion detection through body position, body movement, gait, hand form etc. Most of them perform fairly well in their specific domain.
-However a lot of those approaches require "initialisation poses"\cite{li2016emotion,cui2016emotion,mccoll2012affect,singh2015edbl} which does not make the system usable instantly and in real-time. This is however not surprising, because humans are distinct individuals and their neutral body poses/ gaits/ movements can be very different.
-It is also interesting to see that approaches with neural networks are making big advances (see \cite{schindler2008recognizing}). This shows that it is not really important to have metrics on how to interpret the different emotions, but instead we can use human-created datasets\cite{calvo2010affect,wang2008recognizing,ma2006motion,karg2009comparison} to train the network and being able to learn how to recognize the emotion.
+One thing that we always have to keep in mind is that emotion recognition is not an easy task, also for the human himself\cite{ekman1974detecting,karg2012pattern,schindler2008recognizing}. The approaches in emotion detection through body language are dominated by a range of machine-learning algorithms. The research clearly shows that it is possible to detect human emotions from body language in a fairly accurate way.
 
-\note{IncrementalAndInteraction paper, tell that i've learned that some emotions are grouped close together and share some similar features, e.g. happy and surprise. }
+There are many different approaches that tackle specific problems in this domain e.g. emotion detection through body position, body movement, gait, hand form etc. Most of them perform fairly well in their specific domain. Sometimes various emotions are harder to distinguish than others. For example distinguishing anger and normal is easier than distinguishing anger and happy\cite{li2016emotion} (see \autoref{subsec:LiGait}) and some emotions share similar features like for example happiness and surprise\cite{kleinsmith2005incremental}.
 
+However a lot of those approaches require "initialisation poses"\cite{li2016emotion,cui2016emotion,mccoll2012affect,singh2015edbl} which does not make the system usable instantly and in real-time. This is not surprising, because humans are distinct individuals and their neutral body poses/ gaits/ movements can be very different from each other.
+It is also interesting to see that approaches with neural networks become increasingly more popular. \
+
+We can see that it is not really important to have metrics on how to interpret the different emotions, but instead we can use human-created datasets to train the network and being able to learn how to recognize the emotion.
 
 
 
