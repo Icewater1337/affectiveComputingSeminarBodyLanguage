@@ -698,7 +698,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Affective Computing For Empathic Behaviour Change}
+\title{Affective Computing For Empathic Behaviour Change - Emotion detection via body language}
 
 
 % author names and affiliations
@@ -746,9 +746,9 @@ Email: fuchsmat@students.unibe.ch}}
 
 
 \begin{abstract}
-Humans strive to build machines that can interact with humans in a humanoid way. This is why it is crucial for a computer to be able to understand in which emotional state the user is in. To achieve such a feat there are different approaches.
-Within the research area of affective computing, a large part of the studies focusses on facial expressions and changes in speech. These expressions are good to recognize the emotional state of a human during social interaction, however they may not be suitable  in other situations for example recognizing emotions from a greater distance\cite{karg2012pattern}.
-In this paper I give an overview over the body language recognition approaches done today and propose a model which analyses emotions based on the way a human subject walks.
+There are many reasons why it is crucial for a computer to be able to understand in which emotional state the user is in e.g. Lie detection, help people with aspergers to recognize emotions, machines that interact like humans etc.
+The research area of affective computing strives to achieve this feat. 55\% of human communication is made up of non-verbal signals\cite{eckman2003emotions,mehrabian1969significance}. This is why body language plays an important role to help detect the emotional state of a person. It is especially useful in situations  where emotion detection through face or voice is failing. For example recognizing emotions from a greater distance, without being able to see the face or hear the person\cite{karg2012pattern}. 
+In this paper I give an overview over the body language recognition approaches done today and propose a model which detects the emotional state of a person based on the way they walk.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -776,10 +776,11 @@ In this paper I give an overview over the body language recognition approaches d
 
 
 \section{Introduction}
-For a long time people were convinced that human behaviour is "all nurture and no nature"\cite{eckman2003emotions}. However already Darwin\cite{darwin} suggested that along with the facial expression, the human body movements and the gestures also represent the state of mind and the corresponding emotions of humans. We know today that body language pays a very important contribution to understand the affective state of a person\cite{ekman1967head,mccoll2012affect}. Surprisingly only 7\% of human communication are made of words and 55\% are made up of non-verbal communication\cite{eckman2003emotions,singhsignificance,mehrabian1969significance}. 
-The idea of this paper was to focus on micro expressions in body language. However there are no bodily micro expressions as in facial micro expressions. A micro expression is a "very fast facial movement lasting less than one-fifth of a second"\cite{eckman2003emotions}. Body language in comparison can be subconscious however it can be consciously changed more easily, than a facial micro expression. This is the reason that I focus on the emotion detection via body language in this paper.
+For a long time people were convinced that human behaviour is "all nurture and no nature"\cite{eckman2003emotions}. However already Darwin\cite{darwin} suggested that along with the facial expression, the human body movements and the gestures also represent the state of mind and the corresponding emotions of humans. We know today that body language plays a very important role to understand the affective state of a person\cite{ekman1967head,mccoll2012affect}. Surprisingly only 7\% of human communication are made of words and 55\% are made up of non-verbal communication\cite{eckman2003emotions,singhsignificance,mehrabian1969significance}. 
 
-There are various uses for emotion detection by body language. Some of those are detecting the \emph{affective state} of a person, \emph{lie detection}, the degree of \emph{accessibility} towards another person etc. Different indicators for interpreting body language can be \emph{body position and distance}\cite{mccoll2012affect,mehrabian1969significance}, \emph{body movement}\cite{singhsignificance,karg2012pattern} and \emph{hand form}\cite{wang2007hand,triesch2001system}. This list is not necessarily concluding, but those are the parts that I focussed on in this work.
+The idea of this paper was to focus on micro expressions in body language. However there are no bodily micro expressions as in facial micro expressions. A micro expression is a "very fast facial movement lasting less than one-fifth of a second"\cite{eckman2003emotions}. Body language in comparison can be subconscious but it can also faked more easy than a facial micro expression. This is the reason that I focus on the emotion detection via body language in this paper.
+
+There are various uses for emotion detection by body language. Some of those are detecting the \emph{affective state} of a person, \emph{lie detection}, the degree of \emph{accessibility} towards another person etc. Indicators for interpreting body language can be \emph{body position and distance}\cite{mccoll2012affect,mehrabian1969significance}, \emph{body movement}\cite{singhsignificance,karg2012pattern} and \emph{hand form}\cite{wang2007hand,triesch2001system}. This list is not necessarily concluding, but those are the parts that this paper focusses on.
 
 \begin{figure}[H]
 \centering
@@ -789,7 +790,7 @@ There are various uses for emotion detection by body language. Some of those are
 \end{figure}
 
 
-In the field of affective computing however, it is not only a challenge to interpret the body language, but also to detect the position of the human posture and get useful data out of it. This leads to the two main challenges: \emph{1. Detection of the posture} and \emph{2. How to interpret the posture representation} ( see \autoref{fig:phasesOfEmotionDetectingSystem}\cite{singhsignificance}). However those two steps are done in one with certain machine learning approaches that consist of neural networks\cite{schindler2008recognizing, kleinsmith2007recognizing, kleinsmith2005incremental}.
+In the field of affective computing however, it is not only a challenge to interpret the body language, but also to detect the position of the human posture and get useful data out of it. This leads to the two main challenges: \emph{1. Detection of the body posture/ movement} and \emph{2. How to interpret the posture representation} ( see \autoref{fig:phasesOfEmotionDetectingSystem}\cite{singhsignificance}). However those two steps are done in one with certain machine learning approaches\cite{schindler2008recognizing, kleinsmith2007recognizing, kleinsmith2005incremental}.
 
 In the following work I will first give an overview over the psychology behind emotion detection through body language. After that I present papers that provide approaches for both, the detection of the human posture as well as for interpreting the found results. Finally I propose a theoretical model of how to recognize human emotion by gait in real-time. 
 
@@ -813,7 +814,7 @@ As already stated, 55\% of our communication consists of non-verbal cues, like b
 \end{figure}
 
 Those emotions seem to be universal and the same across different cultures\cite{ekmann1973universal}. The motivation for those 6 categories goes back to the theory, that the same facial muscles are used for the same emotions across different cultures\cite{schindler2008recognizing}. This categorical notion of emotions allows systems to more easily categorize new samples to one of those existing categories, instead of having to create new categories from scratch\cite{schindler2008recognizing}.
-We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}), because those signs are mostly shown involuntary micro expressions. Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. 
+We can find clear signs of all those emotions in our faces (see \autoref{fig:basicEmotions}\footnote{\url{https://hubpages.com/health/Facial-Expressions-Emotions-and-Feelings}}). Recently more research has been done in the field of detecting emotions through body language, like body movement and body pose\cite{de2006towards,grezes2007perceiving,meeren2005rapid}. In \autoref{fig:basicEmotionsBodyLanguage} we can see a representation of the body pose for the 6 basic emotions. 
 \begin{figure}
 \centering
    \includegraphics[width=\linewidth]{basicEmotionsBodylanguage.jpg}
@@ -821,24 +822,25 @@ We can find clear signs of all those emotions in our faces (see \autoref{fig:bas
   \label{fig:basicEmotionsBodyLanguage}
 \end{figure}
 
-In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs based on the body position and body movement. 
-\begin{figure}
+The research is not conclusive about how to interpret body language. In \autoref{fig:bodyPostureTable} we can see a possible way on how to interpret certain bodily signs based on the body position and body movement\cite{singhsignificance}.
+ 
+\begin{figure}[H]
 \centering
    \includegraphics[width=\linewidth]{bodyPostureTable.jpg}
   \caption{A table of bodily signs for different emotions\cite{singhsignificance}}
   \label{fig:bodyPostureTable}
 \end{figure}
-The distance between two people can also show the attitude between them. If the distance is less than the local social norms permit, we can infer a negative attitude\cite{mehrabian1969significance}. However this has to be treated carefully, because the context is important. For example, if two people that are in a romantic relationship with each other, then less distance is not a negative sign. It has also been found, that the meaning of distance depends on the expectancies of the subjects. If the subjects expect a positive interaction, then a close distance is a positive thing, and if they expect a negative interaction, then a close distance is negative\cite{mehrabian1969significance}. Examples of approaches in \autoref{sec:emotionBodyMovementPos}.\
+The distance between two people can also show the attitude between them. If the distance is less than the local social norms permit, we can infer a negative attitude\cite{mehrabian1969significance}. However this has to be treated carefully, because the context is important. For example, if two people that are in a romantic relationship with each other, then less distance is not a negative sign. It has also been found, that the meaning of distance depends on the expectancies of the subjects. If the subjects expect a positive interaction, then a close distance is a positive thing, and if they expect a negative interaction, then a close distance is negative\cite{mehrabian1969significance}. Examples of different approaches will be shown in \autoref{sec:emotionBodyMovementPos}.\
 
-In addition larger body movements like the gait of a person, can also tell us something about the emotional state of a person. It has been found that the arm swing, the stire length and the heavy-footedness of a persons gait, can reveaal their emotional state\cite{montepare1987identification}. For example are angry movements larger, faster and seem jerky, compared to normal movements\cite{singhsignificance}. Whereas fearful and sad movements tend to be less energetic, smaller and slower\cite{singhsignificance}. Examples of approaches in \autoref{sec:emotionGait}.\
+In addition larger body movements like the gait of a person, can also tell us something about the emotional state. It has been found that the arm swing, the stire length and the heavy-footedness of a persons gait, can reveal their emotional state\cite{montepare1987identification}. For example angry movements tend to be larger, faster and seem jerky, compared to normal movements\cite{singhsignificance}. Whereas fearful and sad movements tend to be less energetic, smaller and slower\cite{singhsignificance}. Examples of different approaches will be shown in \autoref{sec:emotionGait}.\
 
 
-The form of the hand can also give information about the emotional state of a person. For example open palms could mean pleasure/ openness, closed hands towards the chest could mean a sense of pride and clenched fists could mean anger\cite{beale2008affect,singh2015edbl}. Kipp and Martin (2009) et al.\cite{kipp2009gesture} even stated, that for right-handed people, the right hand was more used when experiencing anger and the left hand more, when their feelings were relaxed and positive. Examples of approaches in \autoref{sec:emotionHand}.
+The form of the hand can also give information about the emotional state of a person. For example open palms could mean pleasure/ openness, closed hands towards the chest could mean a sense of pride and clenched fists could mean anger\cite{beale2008affect,singh2015edbl}. Kipp and Martin (2009) et al.\cite{kipp2009gesture} even stated, that for right-handed people, the right hand was more used when experiencing anger and the left hand more, when their feelings were relaxed and positive. Examples of different approaches will be shown in \autoref{sec:emotionHand}.
 
 In the following sections I summarize a few approaches that extract and/or interpret body language in different ways. 
 
 
-\section{Emotion detection through body position}
+\section{Emotion detection through body position and movement}
 \label{sec:emotionBodyMovementPos}
 \subsection{Lie Detection based on Facial Micro Expression, body Language and Speech Analysis}
 \label{subsec:lieDetectionLAM}
@@ -855,7 +857,7 @@ The Limb Action Model extracts 10 limbs from a body posture: "Spine to center sh
 \end{figure}
 
 \subsubsection{Interpretation}
-As the paper focusses on lie detection, they defined the following signs for lying\cite{kinsey2012,sorjoo,barathi2016lie}:
+As the paper focusses on lie detection, they used the following signs for lying\cite{kinsey2012,sorjoo,barathi2016lie}:
 \begin{itemize}
 \item{Increasing hand to face/mouth gestures}
 \item{Nose touching: Because of an adrenaline rush, the capillaries open up, which causes the nose to itch}
@@ -863,12 +865,13 @@ As the paper focusses on lie detection, they defined the following signs for lyi
 \item{Small gestures like lip biting, hands rubbing, fidgeting}
 \item{Clenched fist, crossed arms}
 \end{itemize}
-According to those specifications they trained their system with images of liars that were exhibiting those typical body language cues for lying and pictures of people who were not lying. All the images are subjected to the Limb Action Model Converter. Finally they clustered the converted pictures with k-means.
+According to those specifications the system is trained with images of liars that were exhibiting those typical body language cues for lying and pictures of people who were not lying. All the images are subjected to the Limb Action Model Converter. Finally they clustered the converted pictures with k-means.\
+
 Sadly they did not provide an evaluation for the body language part of their method.
 
 \subsection{EDBL - Algorithm for Detection and Analysis of Emotion Using Body Language }
 \subsubsection{Body pose extraction}
-EDBL\cite{singh2015edbl} relies on a pose estimation which is using postelets for humnan parsing\cite{wang2011learning}. Different postelets are extracted from images. A linear SVM classifier is trained for detecting the presence of each postelet. In the end we get a complete model of the human. See \autoref{fig:posteletsFeatureExtraction} for a graphical representation of the process.
+The EDBL approach by Singh et al.\cite{singh2015edbl} relies on a pose estimation which is using postelets for humnan parsing\cite{wang2011learning}. Different postelets are extracted from images. A linear SVM classifier is trained for detecting the presence of each postelet. In the end we get a complete model of the human. See \autoref{fig:posteletsFeatureExtraction} for a graphical representation of the process.
 
 \begin{figure}[H]
 \centering
@@ -877,7 +880,7 @@ EDBL\cite{singh2015edbl} relies on a pose estimation which is using postelets fo
 \label{fig:posteletsFeatureExtraction}
 \end{figure}
 
-Based on the postelet representation a line graph (see \autoref{fig:edblStickPose} of the extracted pose is created and used for the interpretation of the body posture. 
+Based on the postelet representation a line graph (see \autoref{fig:edblStickPose}) of the extracted pose is created and used for the interpretation of the body posture. 
 
 \begin{figure}[H]
 \centering
@@ -887,7 +890,11 @@ Based on the postelet representation a line graph (see \autoref{fig:edblStickPos
 \end{figure}
 
 \subsubsection{Interpretation}
-To figure out the emotional state of a person, the position of the shoulders is interpreted. There is differentiated between three different types of poses: 1. normal/ calm, 2. confused, amazed or in doubt and 3. depressed/ not interested. \autoref{fig:shoulderPositionAndMeaning} shows the three different types. First the slope of the normal shoulder position $\theta$ is calculated. An initialisation pose is needed. Then it is compared to other images of the same person and if the slope is bigger than the slope of 	$\theta$ then it is a sign of doubt, confusion or being amazed. If the slope is smaller than the slope of $\theta$ then it is a sign of a depressed, not-interested or lazy emotional state.
+To figure out the emotional state of a person, the position of the shoulders is interpreted. There is a differentiation between three different types of poses: 1. normal/ calm, 2. confused, amazed or in doubt and 3. depressed/ not interested. \autoref{fig:shoulderPositionAndMeaning} shows images of the three different types. 
+
+First the slope of the normal shoulder position $\theta$ is calculated. An initialisation pose is needed in order to do this. Then it is compared to other images of the same person and if the slope is bigger than the slope of 	$\theta$ then it is a sign of doubt, confusion or being amazed. If the slope is smaller than the slope of $\theta$ then it is a sign of a depressed, not-interested or lazy emotional state.\
+
+This approach also offered no evaluation to validate it. 
  
 \begin{figure}[H]
 \centering
@@ -898,7 +905,7 @@ To figure out the emotional state of a person, the position of the shoulders is 
 
 \section{Affect Detection from Body Language during Social HRI}
 \subsubsection{Body pose extraction}
-This approach of McColl et al\cite{mccoll2012affect} also uses Microsoft Kinect as a base to extract the body pose. It creates an ellipsoid model as seen in \autoref{fig:ellipsoidModel}. To do this, the Kinect sensor first performs a human body extraction. Then the extracted body poses are observed to see if a static pose is displayed. Once a static pose is identified the segmented body parts are fitted with ellipsoids\cite{mccoll2012affect}. The static body poses are further explained in \autoref{subsubsec:ellipsoidModelInterpretation}.
+This approach of McColl et al\cite{mccoll2012affect} also uses Microsoft Kinect as a base to extract the body pose. It creates an ellipsoid model as seen in \autoref{fig:ellipsoidModel}. It works by extracting body poses with Kinect. Then the extracted body poses are observed to see if a static pose is displayed. Once a static pose is identified the segmented body parts are fitted with ellipsoids. The static body poses are further explained in \autoref{subsubsec:ellipsoidModelInterpretation}.
 
 \begin{figure}[H]
 \centering
@@ -911,12 +918,12 @@ This approach of McColl et al\cite{mccoll2012affect} also uses Microsoft Kinect 
 \label{subsubsec:ellipsoidModelInterpretation}
 To figure out the emotional state of the subject, static body poses are used. The poses are based on the Nonverbal Interaction States Analysis of the Davis Nonverbal States Scale\cite{davis1994nonverbal}. Body angle, trunk lean and arm position are evaluated. The resulting metrics are the following: 
 \begin{itemize}
-\item{\textbf{Three different body angles:} \emph{Toward(T)}: 0°-3° angle from the robot, \emph{Neutral(N)}: 3°-15° angle from the robot, \emph{Away(A)}: >15° from the robot}
+\item{\textbf{Three different body angles:} \emph{Toward(T)}: $0^{\circ}-3^{\circ}$ angle from the robot, \emph{Neutral(N)}: $3^{\circ}-15^{\circ}$ angle from the robot, \emph{Away(A)}:  $>15^{\circ}$ from the robot.}
 \item{\textbf{Trunk lean:}\emph{Upright}: The shoulders are over the hips, \emph{Forward/ backward lean}: The shoulders are closer/ farther away than the hips in relation to the robot, \emph{Right/ left lean}: The right/ left shoulder is tilted past the right/ left hip.}
-\item{\textbf{Arm positions:} \emph{T}: The arms are closer to the robot than the upper trunk, \emph{A}: The arms are farther from the robot than the trunk, \emph{N}: else}
+\item{\textbf{Arm positions:} \emph{T}: The arms are closer to the robot than the upper trunk, \emph{A}: The arms are farther from the robot than the trunk, \emph{N}: else.}
 \end{itemize}
 
-According to those metrics 4 accessibility levels\cite{mccoll2012affect} have been defined (see \autoref{fig:accessibilityLevels}). Level I-IV, where I is least accessible and IV is the most accessible state. The arm orientation is used for a finer scaling of the accessibility levels.
+According to those metrics, 4 accessibility levels have been defined (see \autoref{fig:accessibilityLevels}). Level I-IV, where I is least accessible and IV is the most accessible state. The arm orientation is used for a finer scaling of the accessibility levels.
 
 \begin{figure}[H]
 \centering
@@ -926,13 +933,13 @@ According to those metrics 4 accessibility levels\cite{mccoll2012affect} have be
 \end{figure}
 
 
-This approach classified acessibility with an accuracy of 88\%\cite{mccoll2012affect}.
+This approach classified the accessibility correctly with an accuracy of 88\%. This a solid result. However the approach is very limited in its application and needs a highly specific set-up.
 
 
 \subsection{Recognizing Emotions Expressed by Body Pose: a Biologically Inspired Neural Model}
 This approach by Schindler et al.\cite{schindler2008recognizing} aims to categorize images into the 6 basic emotions\cite{eckman2003emotions} \emph{angry, disgusted, fearful, happy, sad, surprised and neutral}. The Idea is to model the visual pathway of recognition of a human. This means the process in which the visual cortex extracts cues from the visual input to determine an emotion\cite{schindler2008recognizing}. The model is inspired by \cite{riesenhuber1999hierarchical,serre2007robust}. This approach is interesting, because it combines various commonly used and efficient techniques like MAX pooling, PCA and SVM in a hierarchical way that follows the organization of the human visual cortex.
 
-The visual cortex contains various areas: \emph{Primary visual cortex (V1), secondary visual cortex or prestriate cortex (V2), visual area (V3), visual area (V4) and middle temporal visual area (V5)}\footnote{\url{https://en.wikipedia.org/wiki/Visual_cortex}}. The model is built according to those areas (see \autoref{fig:biologicallyInspiredNeuralModel}). 
+The visual cortex consists of the following areas: \emph{Primary visual cortex (V1), secondary visual cortex or prestriate cortex (V2), visual area (V3), visual area (V4) and middle temporal visual area (V5)}\footnote{\url{https://en.wikipedia.org/wiki/Visual_cortex}}. The model is built according to those areas (see \autoref{fig:biologicallyInspiredNeuralModel}). 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{biologicallyInspiredNeuralModel.jpg}
@@ -941,7 +948,7 @@ into a discriminative classifier (IT). Parameters were chosen for illustration p
 \label{fig:biologicallyInspiredNeuralModel}
 \end{figure}
 
-The recall of the system achieved 82\% whereas the recall for human testers was 87\%. This means that on average the model only miss-classified 5\% more than the human testers. Interesting to see is the direct comparison against the human for the single emotions that were classified (see \autoref{fig:biologicallyInspiredNeuralModelEval}).
+The recall of the system achieved 82\% whereas the recall for human testers was 87\%. This means that on average the model only miss-classified 5\% more than the human testers. Interesting to see is the direct comparison against the human for the single emotions that were classified (see \autoref{fig:biologicallyInspiredNeuralModelEval}). Anger and disgust are the most difficult to  classify, for the machine as well as for the humans. However the classification gap between the machine and the human is the biggest for anger, disgust and fear.
 
 This approach is quite interesting, because it performs fairly well, even though the training set only consists of 50 actors that created a total of 696 images.
 
@@ -957,8 +964,9 @@ This approach is quite interesting, because it performs fairly well, even though
 
 
 \subsection{Real Time Multi-Person 2D Pose Estimation using Part Affinity Fields}
-The approach of Cao et al.\cite{cao2017realtime} inputs a given image into a two-branch convolutional neural network. First a feed forward network simultaneously predicts a set of confidence maps of the body part locations (see \autoref{fig:openPoseProcess} (b)) and a set of vector fields of part affinities, which encode the degree of association between the different parts (see \autoref{fig:openPoseProcess} (c))\cite{cao2017realtime}. After that the confidence maps and the affinity fields are parsed by greedy inference (see \autoref{fig:openPoseProcess}) and they output the 2D key points for all the people in the image\cite{cao2017realtime}.
-Like this we could also analyse the shoulder position like it was done in \cite{barathi2016lie} and other movement based emotion detection. However it would not be possible to angle-based evaluations like in McCol et al's approach\cite{mccoll2012affect}. 
+The approach of Cao et al.\cite{cao2017realtime} inputs a given image into a two-branch convolutional neural network. First a feed forward network simultaneously predicts a set of confidence maps of the body part locations (see \autoref{fig:openPoseProcess} (b)) and a set of vector fields of part affinities, which encode the degree of association between the different parts (see \autoref{fig:openPoseProcess} (c)). After that the confidence maps and the affinity fields are parsed by greedy inference (see \autoref{fig:openPoseProcess} (d)) and they output the 2D key points for all the people in the image.
+
+Like this we could also analyse the shoulder position like it was done in \cite{barathi2016lie} and other movement based emotion detection. However it would not be possible to do angle-based evaluations like in McCol et al's approach\cite{mccoll2012affect}. 
 
 \begin{figure}[H]
 \centering
@@ -971,37 +979,37 @@ Like this we could also analyse the shoulder position like it was done in \cite{
 \label{sec:emotionHand}
 \subsection{A system for person-independent hand posture recognition against complex backgrounds}
 \subsubsection{Hand pose extraction}
-Most approaches in this field, require the hand to be in front of a static background or the hand to be the only skin coloured item in the picture, in order for it to be recognized\cite{cui1995learning,hunter1995posture,kohler1997technical,min1999visual}. The approach of Triesch and Malsburg\cite{triesch2001system}, proposes a solution using elastic graph matching (EGM) with multiple feature types. EGM is "a neurally inspired object recognition architecture"\cite{lades1993distortion}. In EGM the views of objects are visualized as a labeled 2-d graph.\cite{triesch2001system}. The nodes of the graph contain a local image description and the edges are labelled with a distance vector which represents the distance between the nodes. 
+Most approaches in this field, require the hand to be in front of a static background or the hand to be the only skin coloured item in the picture, in order for it to be recognized\cite{cui1995learning,hunter1995posture,kohler1997technical,min1999visual}. The approach of Triesch and Malsburg\cite{triesch2001system}, proposes a solution using elastic graph matching (EGM) with multiple feature types. EGM is "a neurally inspired object recognition architecture"\cite{lades1993distortion}. In EGM the views of objects are visualized as a labelled 2-d graph. The nodes of the graph contain a local image description and the edges are labelled with a distance vector which represents the distance between the nodes. 
 
 
 \subsubsection{Interpretation}
-Various graphs are created from training images and then images of new hands are matched to the most similar existing image. In \autoref{egmHand} we can see an example of a graph, which is matched to a new hand.
+Various graphs are created from training images and then images of new hands are matched to the most similar existing image. In \autoref{fig:egmHand} we can see an example of a graph, which is matched to a new hand.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{egmHand.jpg}
 \caption{Picture of an elastic graph of a hand, and a new hand that matches it\cite{triesch2001system}}
 \label{fig:egmHand}
 \end{figure}
-Like this we can easily recognize if a hand is clenched to a fist ( e.g. anger).
 
-The reported accuracy of this approach is 92.9\% accuracy on simple backgrounds and 85.8\% accuracy on complex background.
+The reported accuracy of this approach is 92.9\% against simple backgrounds and 85.8\% accuracy against complex background.
+With this approach we can easily recognize if a hand is for example clenched to a fist ( i.e. anger/aggression) and it is not  limited, because it also works against complex backgrounds.
 
-\section{Emotion detection through gait}
+\section{Emotion detection through human gait}
 \label{sec:emotionGait}
 \subsection{Emotion Detection from Natural Walking}
 \label{subsec:EDNW}
 \subsubsection{Gait information extraction}
-Although the approach of Cui et al.\cite{cui2016emotion} used is not 100\% fitting to this topic, it is interesting and worth to mention. To extract the data from the gait, they attached two smartphones (Samsung I9100G) to one wrist and one ankle separately\cite{cui2016emotion}.  The phone's accelerometer was used to gather data of the walk. After preprocessing it, various features are extracted using Principal Component Analysis (PCA)\cite{cui2016emotion}.\
+Although this approach of Cui et al.\cite{cui2016emotion} is not 100\% fitting to this topic, it is interesting and worth to mention. To extract the data from the gait, they attached two smartphones (Samsung I9100G) to one wrist and one ankle separately\cite{cui2016emotion}.  The phone's accelerometer was used to gather data of the walk. After preprocessing it, various features are extracted using Principal Component Analysis (PCA).\
 
-To start, the 59 participants were asked to walk naturally back and forth on an area of 6m x 0.8m for two minutes\cite{cui2016emotion}. After that they reported their current emotional state from 1-10\cite{cui2016emotion}. On the first round 1 was no anger and 10 was angry, whereas in the second round 1 was not happy and 10 was very happy.  After that the participants watched an emotional film clip for emotional priming\cite{cui2016emotion}. After this the participants were asked to walk again for one minute, and report the anger score after the walk and recall the anger score right after the film\cite{cui2016emotion}.  After at least three hours, the same experiment was done again with a happy film. 
+To build the training set, the 59 participants were asked to walk naturally back and forth on an area of 6m x 0.8m for two minutes\cite{cui2016emotion}. After that they reported their current emotional state from 1-10. On the first round 1 was no anger and 10 was angry, whereas in the second round 1 was not happy and 10 was very happy.  After that the participants watched an emotional film clip for emotional priming. After this the participants were asked to walk again for one minute, and report the anger score after the walk and recall the anger score right after the film.  After at least three hours, the same experiment was repeated with a happy film. 
 \subsubsection{Interpretation}
-The classification approach was done in different ways. The most successful one was using SVM. It correctly classified the emotion of the walk with ~90\% \cite{cui2016emotion}. 
-This approach shows, that we can detect the emotional state of a person from it's gait, however because all people walk very individually, it is necessary to get a baseline walk from each person. Hence it is very hard/ impossible to instantly infer information from a person's walk, when seeing the person for the first time.
+The classification approach was done in different ways. The most successful one was using SVM. It correctly classified the emotion of the walk with 90\%. 
+This approach shows, that we can detect the emotional state of a person from it's gait, however because different people walk very individually, it is necessary to get a baseline walk from each person. Hence it is very hard/ impossible to instantly infer information from a person's walk, when seeing the person for the first time (More to person-dependent and person-independent gait in \autoref{sec:proposal}).
 
 \subsection{Emotion recognition using Kinect motion capture data of human gaits}
 \label{subsec:LiGait}
 \subsubsection{Gait information extraction}
-The approach of Li et al.\cite{li2016emotion} uses a set up with two kinect cameras that were placed oppositely at the two ends of a 6m x 1m footpath. The emotional states of the participants were recorded in the same way as in the experiment described under \autoref{subsec:EDNW}. The data reported by the two kinect cameras was processed independently\cite{li2016emotion}. Kinect outputs a stick figure with the different body joints marked (see \autoref{fig:kinectStick}) of the recorded person. The recorded data contains the 3-dimension position of the 14 joints\cite{li2016emotion}. This results in a 42 dimension vector. Because each record consisted of T frames, the data of one record is represented by a T * 42 matrix\cite{li2016emotion}. Fourier transformation was used for further feature extraction\cite{li2016emotion}. 
+The approach of Li et al.\cite{li2016emotion} uses a set up with two Kinect cameras that were placed oppositely at the two ends of a 6m x 1m footpath. The emotional states of the participants were recorded in the same way as in the experiment described under \autoref{subsec:EDNW}. The data reported by the two Kinect cameras was processed independently. Kinect outputs a stick figure with the different body joints marked (see \autoref{fig:kinectStick}) of the recorded person. The recorded data contains the 3-dimension position of the 14 joints. This results in a 42 dimension vector. Because each record consisted of T frames, the data of one record is represented by a T * 42 matrix. Fourier transformation was used for further feature extraction. 
 
 \begin{figure}[H]
 \centering
@@ -1013,44 +1021,48 @@ The approach of Li et al.\cite{li2016emotion} uses a set up with two kinect came
 \subsubsection{Interpretation}
 The data was classified in various ways using NaiveBayes, RandomForests, LibSVM and SMO\cite{li2016emotion}. The most successful approach was using NaiveBayes.  
 The reported accuracy was 80.5\% for recognizing angry and neutral states with the Kinect1 camera, using NaiveBayes. 75\% accuracy was achieved with the Kinect2 camera.
-For recognizing happy or neutral, the achieved accuracy was 79.6\% with Kinect1 and 61.8\% with Kinect2. However the distinction between angry and happy only succeeded with an accuracy of 52\%\cite{li2016emotion}.
+For recognizing happy or neutral, the achieved accuracy was 79.6\% with Kinect1 and 61.8\% with Kinect2. However the distinction between angry and happy only succeeded with an accuracy of 52\%.
 
 This approach shows that it is also possible to recognize emotions from human gait, without using any sensors. However it makes a great difference whether the person is recorded from the front or the back.
 
 
 \section{Proposed model for emotion detection through human gait}
-In this section I review the possibilities for recognizing emotions through human gait in a real-time scenario.
+\label{sec:proposal}
+In this section I review the possibilities for recognizing emotions through human gait in a real-time scenario. There are various problems and limitations which are discussed in \autoref{subsec:possibilitiesLimitations}. Finally I propose a concept for a system based on the possibilities and limitations in \autoref{subsec:proposedModel}.
 
 \subsection{Possibilities and limitations}
-The problem with many emotion recognition algorithms is, that they often need a neutral initialization pose\cite{li2016emotion,cui2016emotion} because humans and especially human gaits are very individual. This makes a real-time system very hard, without having data of a specific person beforehand. However there are various gait databases available\cite{wang2008recognizing,karg2009comparison}, which could be used for training with machine learning algorithms. This still has to be treated with great care because 1. The data bases only consist of acted emotions (currently no spontaneous gait database exists that is publicly acessible) and 2. Due to the high individuality of gaits\cite{karg2012pattern,janssen2008recognition}. In \cite{janssen2008recognition} the inter-individual recognition of emotions through gait was only around chance level.
+\label{subsec:possibilitiesLimitations}
+The problem with many emotion recognition algorithms is, that they often need a neutral initialization pose\cite{li2016emotion,cui2016emotion} because humans and especially human gaits are very individual. This makes a real-time system very hard, without having data of a specific person beforehand. However there are various gait databases available\cite{wang2008recognizing,karg2009comparison}, which could be used for training with machine learning algorithms. This still has to be treated with great care because 1. The data only consists of acted emotions (currently no spontaneous gait database exists that is publicly acessible) and 2. Due to the high individuality of gaits\cite{karg2012pattern,janssen2008recognition}. In \cite{janssen2008recognition} the inter-individual recognition of emotions through gait was only around chance level.
 
-\begin{figure}
+However this leads to the next problem, the expression of the affective state in gait is often also associated with the velocity\cite{crane2007motion,pollick2001perceiving,roether2009critical} and other measures like pressure etc., in addition to the movement itself. This is part of the problem that gait data is often characterized by a high dimensionality, temporal dependency, high variability and nonlinearities\cite{karg2012pattern}, which makes a real-time classification difficult (performance wise). This is why it is important to preprocess the gathered data and limit the feature space and do a good feature extraction. PCA, KPCA, LDA and GDA are commonly applied for feature selection\cite{karg2012pattern}.\
+
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{interIndividualClassification.jpg}
 \caption{Average accuracy of inter individual classification approaches with various pre-processing and classification methods\cite{karg2012pattern}}
 \label{fig:interIndividualClassification}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{personDependantClassification.jpg}
 \caption{Average accuracy of inter individual classification approaches with various pre-processing and classification methods\cite{karg2012pattern}}
 \label{fig:personDependantClassification}
 \end{figure}
-However this leads to the next problem, the expression of the affective state in gait is often also associated with the velocity\cite{crane2007motion,pollick2001perceiving,roether2009critical}, in addition to the movement itself. This leads to the problem that gait data is often characterized by a high dimensionality, temporal dependency, high variability and nonlinearities\cite{karg2012pattern}, which makes the real-time classification difficult. This is why it is important to preprocess the gathered data and limit the feature space and do a good feature extraction. PCA, KPCA, LDA and GDA are commonly applied for feature selection\cite{karg2012pattern}.\
 
-\autoref{fig:personDependantClassification} and \autoref{fig:interIndividualClassification} highlight the importance of appropriate preprocessing, feature selection and picking a proper classifier as well as the importance of person dependant (\autoref{fig:personDependantClassification}) and person independent classification (\autoref{fig:interIndividualClassification}).\
+\autoref{fig:personDependantClassification} and \autoref{fig:interIndividualClassification} highlight the importance of appropriate preprocessing, feature selection and picking a proper classifier as well as the importance of person-dependent (\autoref{fig:personDependantClassification}) and person-independent classification (\autoref{fig:interIndividualClassification}).\
 
-The emotion detection can be reduced to a classification problem ( classify into one of the 6 emotion types\cite{eckman2003emotions} described in \autoref{sec:emotions}. The most successful approaches for emotion detection in body movement in general (not gait specific) seem to be support vector machines\cite{karg2012pattern,schindler2008recognizing} and artificial neural networks\cite{karg2012pattern, kapur2005gesture}. However there is not much work found for emotion detection through human gait using artificial neural networks\cite{janssen2008recognition}.
+A positive aspect is that the emotion detection can be reduced to a classification problem ( classify into one of the 6 emotion types\cite{eckman2003emotions} described in \autoref{sec:emotions)}. The most successful approaches for emotion detection in body movement in general (not gait specific) seem to be support vector machines\cite{karg2012pattern,schindler2008recognizing} and artificial neural networks\cite{karg2012pattern, kapur2005gesture}. However there is not much work found for emotion detection through human gait using artificial neural networks\cite{janssen2008recognition}.
 
 \subsection{Concept}
+\label{subsec:proposedModel}
 Based on those limitations the following approach could be useful:
 \begin{itemize}
-\item{Create/ find a large enough gait database to train the model initially}
+\item{Create/ find a large enough gait database to train the model initially.}
 \item{Extract the pose using openPose\cite{cao2017realtime}, as it is working in real-time and without any special equipment. Any camera can do it.}
-\item{Do the feature extraction according to \autoref{fig:interIndividualClassification}. A good choice would be to use Sig. Subsection + LDA\cite{karg2012pattern}}.
-\item{Use a k-nn classifier\cite{karg2012pattern}}
-\item{Do a continuous recording of the individual's gait, together with an evaluation about how they feel in this moment. This could be easily doable in a workplace environment. If the system can compare person-dependent it will greatly improve it's accuracy}
+\item{Do the feature extraction according to \autoref{fig:interIndividualClassification}. A good choice would be to use Sig. Subsection + LDA\cite{karg2012pattern}.}
+\item{Use a nearest node (NN) classifier\cite{karg2012pattern}.}
+\item{Do a continuous recording of the individual's gait, together with an evaluation about how they feel in this moment. This could be easily doable in a workplace environment for example by having a "mood" button right after entering the building. This step is important because if the system can compare person-dependent it will greatly improve it's accuracy.}
 \end{itemize}
 
 A question which I can not answer is, if the classification can work in real-time, or if it takes too long. All the research found did not do it in real-time. Only the openPose pose extraction algorithm worked in real time \cite{cao2017realtime}.\
@@ -1060,14 +1072,15 @@ An artificial neural networks approach or a combination could also work, but the
 
 
 \section{Conclusion}
-One thing that we always have to keep in mind is that emotion recognition is not an easy task, also for the human himself\cite{ekman1974detecting,karg2012pattern,schindler2008recognizing}. The approaches in emotion detection through body language are dominated by a range of machine-learning algorithms. The research clearly shows that it is possible to detect human emotions from body language in a fairly accurate way.
+One thing that we always have to keep in mind is that emotion recognition is not an easy task, even for the human himself\cite{ekman1974detecting,karg2012pattern,schindler2008recognizing}. The approaches in emotion detection through body language are dominated by a range of machine-learning algorithms. The research clearly shows that it is possible to detect human emotions from body language in a fairly accurate way.
 
-There are many different approaches that tackle specific problems in this domain e.g. emotion detection through body position, body movement, gait, hand form etc. Most of them perform fairly well in their specific domain. Sometimes various emotions are harder to distinguish than others. For example distinguishing anger and normal is easier than distinguishing anger and happy\cite{li2016emotion} (see \autoref{subsec:LiGait}) and some emotions share similar features like for example happiness and surprise\cite{kleinsmith2005incremental}.
+There are many different approaches that tackle specific problems in this domain e.g. emotion detection through body position, body movement, gait, hand form etc. Most of them perform fairly well in their specific domain. However there are very few holistic approaches that do not require a specific setup.
 
-However a lot of those approaches require "initialisation poses"\cite{li2016emotion,cui2016emotion,mccoll2012affect,singh2015edbl} which does not make the system usable instantly and in real-time. This is not surprising, because humans are distinct individuals and their neutral body poses/ gaits/ movements can be very different from each other.
-It is also interesting to see that approaches with neural networks become increasingly more popular. \
+Sometimes various emotions are harder to distinguish than others. For example distinguishing anger and a neutral state is easier than distinguishing anger and happy\cite{li2016emotion} (see \autoref{subsec:LiGait}) and some emotions share similar features like for example happiness and surprise\cite{kleinsmith2005incremental}. Overall it seems harder to distinguish between negative emotions, by body positioning and body movement\cite{schindler2008recognizing}. 
 
-We can see that it is not really important to have metrics on how to interpret the different emotions, but instead we can use human-created datasets to train the network and being able to learn how to recognize the emotion.
+A lot of those approaches require initialisation poses\cite{li2016emotion,cui2016emotion,mccoll2012affect,singh2015edbl} which does not make the system usable instantly and in real-time. This is not surprising, because humans are distinct individuals and their neutral body poses/ gaits/ movements can be very different from each other.\
+
+The whole research is very machine-learning dominated. Approaches using artificial neural networks become increasingly more popular\cite{cao2017realtime} as they might bring great advances in this field. Finally I came to the conclusion that it is not really important to have metrics on how to interpret the different emotions, but instead we can use human-created datasets to train the network and being able to learn how to recognize the emotion.
 
 
 
